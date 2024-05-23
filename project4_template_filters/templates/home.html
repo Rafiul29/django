@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1> Length Filter: {{Skills | length}} </h1>
+  
+  <h1> Add : {{4 | add:"2"}} </h1>
+  <h1> join : {{Skills | join:"-"}} </h1>
+  <h1> join : {{Skills | join:"//"}} </h1>
+  <h1> Date : {{date | date:"D d M Y" }} </h1>
+  <h1> Date : {{date | date:"SHORT_DATE_FORMAT" }} </h1>
+  <h1> Date : {{date | date}} </h1>
+  <h1> Add : {{23 | add:"10" }} </h1>
+  <h1>Capfirst Filter :{{name | capfirst}} </h1>
+  <h1>Cut Filter :{{description | cut:" "}} </h1>
+
+  <h1>Dictsort Filter : {{lst | dictsort:"age"}} </h1>
+  <h1>First Filter : {{Skills | first}} </h1>
+  <h1>last Filter : {{Skills | last}} </h1>
+  <h1>last Filter : {{description | linenumbers}} </h1>
+  <h1>Lower Filter : {{description | lower}}</h1>
+  <h1>Upper Filter : {{description | upper}}</h1>
+  <h1>Title Filter : {{description | title}}</h1>
+  <h1>Random Filter : {{Skills | random}}</h1>
+  <h1>Slice Filter : {{Skills | slice:'2'}}</h1>
+  <h1>Timer Filter : {{date | time:"H:i"}}</h1>
+  <h1>Timer Filter : {{date | time:"H\h i\m"}}</h1>
+  <h1>Time Since Filter : {{date | timesince}}</h1>
+  <h1>Truncatechars Filter : {{description | truncatechars:20}}</h1>
+  <h1>WordCount Filter : {{description | wordcount}}</h1>
+  <h1>TruncateWords Filter : {{description | truncatewords:5}}</h1>
+{% comment %} 
+  <h1>Striptags Filter : {{description | striptags }} </h1> {% endcomment %}
+  <h1>You have {{ age }} message {{ age | pluralize }}.
+  <h1>Make_list Filter : {{ description| make_list }} message
+  </h1>
+
+  <h1>slugify Filter : {{ description| slugify }} 
+  </h1>
+  {% comment %} <h1>unorder_list Filter : {{ Skills | unorder_list }}  {% endcomment %}
+  </h1>
+  <h1>{{ age | divisibleby:"3" }}
+  </h1>
+</body>
+</html>
