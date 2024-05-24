@@ -1,18 +1,14 @@
-<!DOCTYPE html> 
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About</title>
-</head>
-<body>
-  <ul>
-    <li><a href="{% url 'home' %}">Home</a></li>
-    {% comment %} <li><a href="{% url 'about' id=1 %}">About</a></li> {% endcomment %}
-    <li><a href="{% url 'about' %}">About</a></li>
-  </ul>
-  this is about page
-  {{id.r}}
-  {{id.page}}
-</body>
-</html>
+{% extends 'base.html' %}
+
+
+{% block content %}
+<ul>
+  <li><a href="{% url 'home' %}">Home</a></li>
+  {% comment %} <li><a href="{% url 'about' id=1 %}">About</a></li> {% endcomment %}
+  <li><a href="{% url 'about' %}">About</a></li>
+</ul>
+this is about page
+{{id.r}}
+{{id.page}}
+{% endblock %}
+  
