@@ -8,6 +8,11 @@
   <title>home</title>
 </head>
 <body>
+
+  <ul>
+    <li><a href="{% url 'home' %}">Home</a></li>
+    <li><a href="{% url 'about'  %}">About</a></li>
+  </ul>
   this is home page
   <img src='{% static "laptop.jpeg" %}' alt="img"/>
 </body>

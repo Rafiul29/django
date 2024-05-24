@@ -237,3 +237,6 @@ def index(request):
 ]
 
   return render(request, 'index.html',{"data": data})
+
+def product(request):
+  return render(request, 'product.html')
