@@ -8,4 +8,5 @@ urlpatterns = [
     path("singup/", views.signup,name="singuppage"),
     path("django_form/",views.djangoForm,name="djangoForm"),
     path("student_form/",views.StudentForm,name="StudentForm"),
+    path("password/",views.PasswordValidation,name="password"),
 ]
