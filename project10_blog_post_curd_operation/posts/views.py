@@ -9,7 +9,7 @@ def add_post(request):
     if post_form.is_valid():
       # print(post_form.cleaned_data)
       post_form.save()
-      return redirect("add_post")
+      return redirect("homepage")
   else:
     post_form=forms.PostForm()
   return render(request,'add_post.html',{'form':post_form})
@@ -25,3 +25,8 @@ def edit_post(request,id):
       post_form.save()
       return redirect("homepage")
   return render(request,'add_post.html',{'form':post_form})
+
+
+def delete_post(request,id):
+  form=models.Post.objects.get(pk=id).delete()
+  return redirect('homepage')
