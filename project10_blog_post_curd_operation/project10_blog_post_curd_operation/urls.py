@@ -16,9 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-
+from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', views.home,name='homepage'),
+    path('delete_post/<int:id>', views.delete_post,name='deletepost'),
+    # path('update_post/<int:id>', views.update_post,name='updatepost'),
     path('author/',include('author.urls')),
     path('profile/',include('profiles.urls')),
     path('post/',include('posts.urls')),
