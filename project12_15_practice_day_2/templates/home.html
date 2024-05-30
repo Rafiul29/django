@@ -5,27 +5,39 @@
   
 <div class="container py-5">
   <div class="d-flex flex-wrap gap-5 justify-content-center:""">
-    {%for post in data%}
-        <div class="card" style="width: 18rem;">
-          <div class="card-body " >
-            <h5 class="card-title">{{post.title}}</h5>
-            <p class="card-text">{{post.content | truncatechars:150}}</p>
-            <p>
-              Author : {{post.author.name}}
-            </p>
-            <p> Category: 
-              {% for cat in post.category.all %}
-            <button class='btn btn-secondary m-1'> {{cat.name}}</button>
-            {% endfor %}
-            </p>
-            <div class='d-flex justify-content-between' >
-              <a href="{% url 'editpost' post.id %}" class="btn btn-primary">Edit</a>
-              <a href="{% url 'deletepost' post.id %}" class="btn btn-danger">Delete</a>
-            </div>
-          </div>
-        </div>
- 
-    {% endfor %}
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Musician Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Album Rating</th>
+          <th scope="col">Instrument Type</th>
+          <th scope="col">Album Name</th>
+          <th scope="col">Release Date</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {%for item in data%}
+        <tr>
+          <th scope="row">{{item.id}}</th>
+          <td>{{item.musician.first_name}} {{item.musician.last_name}}</td>
+          <td>{{item.musician.email}}</td>
+          <td>{{item.rating}}</td>
+          <td>{{item.musician.instrument_type}}</td>
+          <td>{{item.album_name}}</td>
+          <td>{{item.release_date | date:"D d M Y"}}</td>
+          <td>
+            <a href="{% url 'editalbum' item.id%}" class="btn btn-primary">Edit</a>
+            <a href="{% url 'deletealbum' item.id %}" class="btn btn-danger">Delete</a>
+          </td>
+        </tr>
+        {% endfor %}
+        
+      </tbody>
+    </table>
+   
   </div>
   </div>
 </div>
