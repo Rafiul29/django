@@ -7,5 +7,6 @@ class CategoryForm(forms.ModelForm):
     model=Category
     fields='__all__'
     # fields=['name','bio']
+    
  
 
