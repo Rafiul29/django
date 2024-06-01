@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+
+{% block content%}
+  
+<div class="container py-5">
+  <div class="d-flex flex-wrap gap-5 justify-content-center:""">
+    {%for task in data%}
+        <div class="card border-info" style="width:18rem;">
+          <div class="card-body" >
+            <h5 class="card-title">{{task.title}}</h5>
+            <p class="card-text">{{task.description | truncatechars:200}}</p>
+            <p class="card-text">Date: <span class="text-danger ">{{task.date}}</span></p>
+            <div  class="card-text">
+              Category: 
+              <p class='d-felx flex-wrap mt-1'> 
+                {% for cat in task.category.all %}
+              <span class='bg-info border-primary rounded py-1 px-2 m-1 text-lowercase d-inline-block'> {{cat.name}}</span>
+              {% endfor %}
+              </p>
+            </div>
+            {% if task.is_complete %}
+               <h6 class="card-title text-center text-primary">Completed</h6>
+            {% else %}
+               <div class='d-flex justify-content-between'>
+                      <a href="{% url 'edit_task' task.id %}" class="btn btn-outline-primary">Edit</a>
+                      <a href="{% url 'delete_task' task.id %}" class="btn btn-outline-danger">Delete</a>
+                  </div>
+              {% endif %}
+          </div>
+        </div>
+    {% endfor %}
+  </div>
+  </div>
+</div>
+{% endblock %}
