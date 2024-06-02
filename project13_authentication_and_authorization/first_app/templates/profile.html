@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %} 
+
+<h1 class="text-center">Welcome to profile page</h1>
+  {{user}}
+  <p>
+    <a href="{% url 'pass_change' %}" class="btn btn-outline-primary">Change your password</a>
+  </p>
+  <p>
+    <a href="{% url 'pass_change2' %}" class="btn btn-outline-primary">chnage pass with out password</a>
+  </p>
+{% endblock %}
