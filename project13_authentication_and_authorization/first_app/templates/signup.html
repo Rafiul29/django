@@ -16,6 +16,7 @@
       </h1>
       {% csrf_token %}
       {% for fm in form %}
+          <!-- {{form | crispy }} -->
         {{fm.label_tag}}
         {{fm}}
         {{fm.errors | striptags}}

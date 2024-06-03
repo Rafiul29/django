@@ -13,7 +13,7 @@
         <p class='bg-danger p-2'>{{er}}</p>
         {%endfor%}
       {%endif%}
-
+<!-- {{form | crispy }} -->
       {% for fm in form %}
         {{fm.label_tag}}
         {{fm}}
@@ -23,5 +23,5 @@
 
     <button type="submit" class="btn btn-outline-primary">Login</button>
     </form>
-  </div>
+ 
 {% endblock %}
