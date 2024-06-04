@@ -4,29 +4,47 @@
 {% block content%}
   
 <div class="container py-5">
-  <div class="d-flex flex-wrap gap-5 justify-content-center:""">
-    {%for post in data%}
-        <div class="card" style="width: 18rem;">
-          <div class="card-body " >
-            <h5 class="card-title">{{post.title}}</h5>
-            <p class="card-text">{{post.content | truncatechars:150}}</p>
-            <p>
-              Author : {{post.author}}
-            </p>
-            <p> Category: 
-              {% for cat in post.category.all %}
-            <button class='btn btn-secondary m-1'> {{cat.name}}</button>
-            {% endfor %}
-            </p>
-            {% comment %} <div class='d-flex justify-content-between' >
-              <a href="{% url 'editpost' post.id %}" class="btn btn-primary">Edit</a>
-              <a href="{% url 'deletepost' post.id %}" class="btn btn-danger">Delete</a>
-            </div> {% endcomment %}
-          </div>
-        </div>
- 
-    {% endfor %}
+  <div class="d-flex flex-wrap">
+    <div class="col-2 ">
+      
+        {% for cat in category %}
+        <div class="form-check">
+        <input class="form-check-input" type="radio" name="flexRadioDefault" id={{cat.id}}>
+        <label class="form-check-label" for={{cat.id}}>
+         
+          <a href="{% url 'category_wise_post' cat.slug %}" > {{cat}}</a>
+        </label>
+      </div>
+        {%endfor%}
+     
+    </div>
+    <div class="col-10 bg-danger">
+      <div class="d-flex flex-wrap gap-5 justify-content-center">
+        {%for post in data%}
+            <div class="card" style="width: 18rem;">
+              <div class="card-body " >
+                <h5 class="card-title">{{post.title}}</h5>
+                <p class="card-text">{{post.content | truncatechars:150}}</p>
+                <p>
+                  Author : {{post.author}}
+                </p>
+                <p> Category: 
+                  {% for cat in post.category.all %}
+                <button class='btn btn-secondary m-1'> {{cat.name}}</button>
+                {% endfor %}
+                </p>
+                {% comment %} <div class='d-flex justify-content-between' >
+                  <a href="{% url 'editpost' post.id %}" class="btn btn-primary">Edit</a>
+                  <a href="{% url 'deletepost' post.id %}" class="btn btn-danger">Delete</a>
+                </div> {% endcomment %}
+              </div>
+            </div>
+     
+        {% endfor %}
+      </div>
+      </div>
+    </div>
   </div>
-  </div>
+
 </div>
 {% endblock %}
