@@ -40,11 +40,12 @@
         <div class='d-flex gap-1'>
           {% if request.user.is_authenticated %}
 
-          <a href='{% url 'register'%}' class="btn btn-outline-success" type="submit">Profile</a>
+          <a href='{% url 'profile'%}' class="btn btn-outline-success" type="submit">Profile</a>
           <a href='{% url 'login'%}' class="btn btn-outline-success" type="submit">Logout</a>
           {%else%}
 
           <a href='{% url 'register'%}' class="btn btn-outline-success" type="submit">Register</a>
+          
           <a href='{% url 'login'%}' class="btn btn-outline-success" type="submit">Login</a>
           {%endif%}
         </div>

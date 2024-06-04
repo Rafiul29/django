@@ -1,12 +1,12 @@
 {% extends "base.html" %}
-{% block title %} {{type}}{% endblock %} 
-{% block content%}
+{% block title %}Chnage password{% endblock %} 
 
+{% block content%}
 {% load crispy_forms_tags %}
 
   <form method='POST' class="w-50 mx-auto  py-3  mt-5 px-4  rounded  shadow "> 
     <h1 class="text-center">
-      {{type}}
+     Change your password here
     </h1>
     {% csrf_token %}
     {{form | crispy }}

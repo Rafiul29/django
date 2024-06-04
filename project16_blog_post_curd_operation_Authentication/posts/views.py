@@ -8,6 +8,7 @@ def add_post(request):
     post_form=forms.PostForm(request.POST)
     if post_form.is_valid():
       # print(post_form.cleaned_data)
+      post_form.instance.author=request.user
       post_form.save()
       return redirect("homepage")
   else:
@@ -23,8 +24,9 @@ def edit_post(request,id):
     post_form=forms.PostForm(request.POST,instance=post)
     if post_form.is_valid():
       # print(post_form.cleaned_data)
+      post_form.instance.author=request.user
       post_form.save()
-      return redirect("homepage")
+      return redirect("profile")
   return render(request,'add_post.html',{'form':post_form})
 
 
