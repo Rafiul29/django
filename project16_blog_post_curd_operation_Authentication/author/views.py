@@ -70,3 +70,8 @@ def pass_chnage(request):
   else:
     form=PasswordChangeForm(user=request.user)
   return render(request,'pass_change.html',{'form':form})
+
+
+def user_logout(request):
+  logout(request)
+  return redirect('login')
