@@ -1,11 +1,14 @@
+from typing import Any
 from django.shortcuts import render,redirect
 from . import forms
 from django.contrib.auth.forms import AuthenticationForm,PasswordChangeForm
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-
 from posts.models import  Post
+from django.contrib.auth.views import LoginView,LogoutView
+from django.urls import reverse_lazy
+
 
 def register(request):
   if request.method=='POST':
@@ -37,6 +40,27 @@ def user_login(request):
   else:
     login_form=AuthenticationForm()
   return render(request,'forms.html',{'form':login_form,'type':"Login"})
+
+class UserLoginView(LoginView):
+  template_name='forms.html'
+  
+  def get_success_url(self):
+    return reverse_lazy('profile' )
+  
+  def form_valid(self, form):
+      messages.success(self.request,'Logged in successfull')
+      return super().form_valid(form)
+
+  def form_invalid(self, form):
+      messages.success(self.request,'Logged in information incorrent')
+      return super().form_invalid(form)
+  
+  def get_context_data(self, **kwargs: Any):
+    context= super().get_context_data(**kwargs)
+    context['type']="Login"
+    return context
+   
+  
 
 @login_required
 def profile(request): 
@@ -72,6 +96,11 @@ def pass_chnage(request):
   return render(request,'pass_change.html',{'form':form})
 
 
+
 def user_logout(request):
   logout(request)
   return redirect('login')
+
+class UserLogoutView(LogoutView):
+   def get_success_url(self):
+    return reverse_lazy('login')

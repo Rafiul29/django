@@ -4,7 +4,7 @@ from . import models
 from django.contrib.auth.decorators import login_required
 from django.views.generic import CreateView,UpdateView,DeleteView
 from django.urls import reverse_lazy
-
+from django.utils.decorators import method_decorator
 
 # Create your views here.
 # @login_required
@@ -22,6 +22,7 @@ from django.urls import reverse_lazy
 
 
 # add Post using class based view
+@method_decorator(login_required ,name="dispatch")
 class AddPostCreateView(CreateView):
   model=models.Post
   form_class=forms.PostForm
@@ -49,7 +50,7 @@ class AddPostCreateView(CreateView):
 #       return redirect("profile")
 #   return render(request,'add_post.html',{'form':post_form})
 
-
+@method_decorator(login_required ,name="dispatch")
 class EditPostView(UpdateView):
   model=models.Post
   form_class=forms.PostForm
@@ -64,7 +65,7 @@ def delete_post(request,id):
   form=models.Post.objects.get(pk=id).delete()
   return redirect('profile')
 
-
+@method_decorator(login_required ,name="dispatch")
 class DeletePostView(DeleteView):
   model=models.Post
   template_name='delete.html'
