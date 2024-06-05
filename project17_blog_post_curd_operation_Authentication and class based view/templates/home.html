@@ -21,7 +21,8 @@
     <div class="col-10 bg-danger">
       <div class="d-flex flex-wrap gap-5 justify-content-center">
         {%for post in data%}
-            <div class="card" style="width: 18rem;">
+          <div class="card" style="width: 18rem;">
+              <img class="card-img-top" src="{{post.image.url}}" alt="Card image cap">
               <div class="card-body " >
                 <h5 class="card-title">{{post.title}}</h5>
                 <p class="card-text">{{post.content | truncatechars:150}}</p>
