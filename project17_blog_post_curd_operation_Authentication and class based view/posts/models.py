@@ -8,9 +8,9 @@ class Post(models.Model):
   content=models.TextField()
   category=models.ManyToManyField(Category) #many to many relationships
   author=models.ForeignKey(User,on_delete=models.CASCADE) #many to one  or one to many relationships
-  image = models.ImageField(upload_to='posts/media/uploads/', blank = True, null = True)
+  image = models.ImageField(upload_to='posts/images',default='posts/images/default.png', )
 
-  
+  # blank = True, null = True
   def __str__(self) -> str:
     return self.title
 

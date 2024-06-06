@@ -10,9 +10,9 @@ from django.utils.decorators import method_decorator
 # @login_required
 # def add_post(request):
 #   if request.method=='POST':
-#     post_form=forms.PostForm(request.POST)
+#     post_form=forms.PostForm(request.POST,request.FILES)
 #     if post_form.is_valid():
-#       # print(post_form.cleaned_data)
+#       print(post_form.cleaned_data)
 #       post_form.instance.author=request.user
 #       post_form.save()
 #       return redirect("homepage")
@@ -30,6 +30,7 @@ class AddPostCreateView(CreateView):
   success_url = reverse_lazy('profile')
 
   def form_valid(self,form):
+      form =forms.PostForm(self.request.POST, self.request.FILES)
       form.instance.author=self.request.user
       return super().form_valid(form)
     
@@ -76,4 +77,6 @@ class DeletePostView(DeleteView):
 class DetailPostView(DetailView):
   model=models.Post
   pk_url_kwarg='id'
+  template_name='post_details.html'
+  
   

@@ -1,5 +1,25 @@
 {% extends "base.html" %}
-{% block title %}Add Post{% endblock %}
+{% block title %} Post{% endblock %}
 {% block content%}
-
+<div class="container-fluid"> 
+  <div class="row">
+    <div class="col-12">
+        <img class="card-img-top" style="width:50%" src="{{post.image.url}}" alt="{{post.title}}">
+        <div class="card-body" >
+          <h1 class="card-title">
+           {{post.title}}
+          </h1>
+          <p class="card-text">{{post.content}}</p>
+          <p>
+            Author : {{post.author}}
+          </p>
+          <p> Category: 
+            {% for cat in post.category.all %}
+          <button class='btn btn-secondary m-1'> {{cat.name}}</button>
+          {% endfor %}
+          </p>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}
