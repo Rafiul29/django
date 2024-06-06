@@ -1,10 +1,12 @@
 {% extends "base.html" %}
 {% block title %} Post{% endblock %}
+{% load crispy_forms_tags %}
+
 {% block content%}
 <div class="container-fluid"> 
   <div class="row">
     <div class="col-12">
-        <img class="card-img-top" style="width:50%" src="{{post.image.url}}" alt="{{post.title}}">
+        <img class="card-img-top" style="width:20%;height:40%" src="{{post.image.url}}" alt="{{post.title}}">
         <div class="card-body" >
           <h1 class="card-title">
            {{post.title}}
@@ -21,5 +23,29 @@
       </div>
     </div>
   </div>
+
+  <div class="card p-2">
+    <h5>Totoal Comments :{{comments | length}} </h5>
+    <div class="card-body">
+      {% for comment in comments%}  
+      <h6>{{comment.name}} </h6>
+      <p>{{comment.email}} </p>
+      <p>{{comment.body}} </p>
+      <p>{{comment.created_on  }} </p>
+      {%endfor%}
+    </div>
+  </div>
+
+  <div class="">
+    <h2 class='text-center'>Comment Form</h2>
+    <div class="card-body">
+     <form method='POST'>
+        {%csrf_token%}
+      {{comment_form | crispy}}
+      <button class='btn btn-outline-primary'>submit</button>
+     </form>
+    </div>
+  </div>
 </div>
+
 {% endblock %}
