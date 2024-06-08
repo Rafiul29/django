@@ -25,7 +25,7 @@
               <img class="card-img-top" src="{{post.image.url}}" alt="Card image cap">
               <div class="card-body " >
                 <h5 class="card-title">
-                  <a href="{%url 'detailpost' post.id%}" class="text-decoration-none">{{post.title}}</a>
+                  <a href="{%url 'detailpost' post.id %}" class="text-decoration-none">{{post.title}}</a>
                 </h5>
                 <p class="card-text">{{post.content | truncatechars:150}}</p>
                 <p>

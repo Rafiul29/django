@@ -9,6 +9,7 @@ def home(request,category_slug=None):
     category=Category.objects.get(slug=category_slug)
     data=Post.objects.filter(category=category)
 
+  
   return render(request,'home.html',{"data":data,'category':categories})
 
 

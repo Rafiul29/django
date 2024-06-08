@@ -63,7 +63,8 @@ class UserLoginView(LoginView):
   
 
 @login_required
-def profile(request): 
+def profile(request):
+
   data=Post.objects.filter(author=request.user) #filter post author 
   return render(request,'profile.html',{'data':data})
 
