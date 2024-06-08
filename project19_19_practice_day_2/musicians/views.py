@@ -1,27 +1,26 @@
 from django.shortcuts import render,redirect
 from .forms import MusicianForm
 from . import models
-# Create your views here.
+from django.contrib.auth.decorators import login_required
+from django.views.generic import CreateView,UpdateView,DeleteView,DetailView
+from django.urls import reverse_lazy
+from django.utils.decorators import method_decorator
 
-def add_musician(request):
-  if request.method=='POST':
-    musician_form =MusicianForm(request.POST)
-    if musician_form.is_valid():
-      # print(musician_form.cleaned_data)
-      musician_form.save()
-  else:
-    musician_form =MusicianForm()
-  return render(request,'add_musician.html',{'form':musician_form})
- 
 
-def edit_musician(request,id):
-  musician=models.Musician.objects.get(pk=id)
-  print(musician.email)
-  musician_form =MusicianForm(instance=musician)
-  if request.method=='POST':
-    musician_form =MusicianForm(request.POST,instance=musician)
-    if musician_form.is_valid():
-      # print(musician_form.cleaned_data)
-      musician_form.save()
-      return redirect('homepage')
-  return render(request,'add_musician.html',{'form':musician_form})
+@method_decorator(login_required ,name="dispatch")
+class AddMusicianCreateView(CreateView):
+  model=models.Musician
+  form_class=MusicianForm
+  template_name='add_musician.html'
+  success_url = reverse_lazy('add_album')
+  
+  def form_valid(self,form):
+      return super().form_valid(form)
+
+@method_decorator(login_required ,name="dispatch")
+class EditMusicianView(UpdateView):
+  model=models.Musician
+  form_class=MusicianForm
+  template_name='add_musician.html'
+  pk_url_kwarg='id'
+  success_url = reverse_lazy('homepage')
