@@ -2,6 +2,9 @@ from django.shortcuts import render,redirect
 from .forms import AlbumForm
 from . import models
 from django.contrib.auth.decorators import login_required
+from django.views.generic import CreateView,UpdateView,DeleteView,DetailView
+from django.urls import reverse_lazy
+from django.utils.decorators import method_decorator
 
 # Create your views here.
 @login_required
@@ -15,6 +18,17 @@ def add_album(request):
   else:
     album_form =AlbumForm()
   return render(request,'add_album.html',{'form':album_form})
+
+@method_decorator(login_required ,name="dispatch")
+class AddAlbumCreateView(CreateView):
+  model=models.Album
+  form_class=AlbumForm
+  template_name='add_album.html'
+  success_url = reverse_lazy('homepage')
+
+  def form_valid(self,form):
+      return super().form_valid(form)
+  
 
 @login_required
 def edit_album(request,id):
