@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from .forms import MusicianForm
 from . import models
 from django.contrib.auth.decorators import login_required
-from django.views.generic import CreateView,UpdateView,DeleteView,DetailView
+from django.views.generic import CreateView,UpdateView
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 
