@@ -12,6 +12,17 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from django.urls import reverse_lazy
 from django.contrib import messages
+from django.core.mail import EmailMessage,EmailMultiAlternatives
+from django.template.loader import render_to_string
+
+def send_user_email(user, subject, template):
+        message = render_to_string(template, {
+            'user' : user,
+            'subject':subject
+        })
+        send_email = EmailMultiAlternatives(subject, '', to=[user.email])
+        send_email.attach_alternative(message, "text/html")
+        send_email.send()
 
 # Create your views here.
 class UserRegistrationView(FormView):
@@ -72,6 +83,8 @@ class PasswordChangeView(LoginRequiredMixin, FormView):
         form.save()
         update_session_auth_hash(self.request, form.user)
         messages.success(self.request, 'Password changed successfully')
+        send_user_email(self.request.user, "Account Password Change", "accounts/pass_chnage_email.html")
+
         return super().form_valid(form)
 
     def form_invalid(self, form):
